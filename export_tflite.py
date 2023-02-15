@@ -8,7 +8,6 @@ import tensorflow as tf
 
 def tf2tflite(input_model_dir_path, output_model_file_path, representative_dataset_gen, input_height, input_width):
     os.makedirs(os.path.dirname(output_model_file_path), exist_ok=True)
-    tf.compat.v1.enable_eager_execution()
 
     loaded = tf.saved_model.load(input_model_dir_path)
     concrete_func = loaded.signatures[tf.saved_model.DEFAULT_SERVING_SIGNATURE_DEF_KEY]
@@ -52,10 +51,11 @@ if __name__ == '__main__':
     parser.add_argument('--train_input_dir_path', type=str,
                         default='~/.vaik_text_recognition_pb_trainer/dump_dataset')
     parser.add_argument('--output_model_file_path', type=str,
-                        default='~/.vaik_text_recognition_pb_exporter/model.tflite', help="output tflite model file path")
+                        default='~/.vaik_text_recognition_pb_exporter/model.tflite',
+                        help="output tflite model file path")
     parser.add_argument('--input_height', type=int, default=96)
     parser.add_argument('--input_width', type=int, default=576)
-    parser.add_argument('--sample_max_num', type=int, default=2500, help="output tflite model dir path")
+    parser.add_argument('--sample_max_num', type=int, default=25000, help="output tflite model dir path")
     args = parser.parse_args()
 
     args.input_model_dir_path = os.path.expanduser(args.input_model_dir_path)
