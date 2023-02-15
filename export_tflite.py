@@ -19,7 +19,7 @@ def tf2tflite(input_model_dir_path, output_model_file_path, representative_datas
     converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
     converter.target_spec.supported_types = [tf.int8]
     converter.inference_input_type = tf.uint8
-    converter.inference_output_type = tf.uint8
+    converter.inference_output_type = tf.int8
     converter.representative_dataset = representative_dataset_gen
 
     tflite_quant_model = converter.convert()
@@ -55,7 +55,7 @@ if __name__ == '__main__':
                         help="output tflite model file path")
     parser.add_argument('--input_height', type=int, default=96)
     parser.add_argument('--input_width', type=int, default=576)
-    parser.add_argument('--sample_max_num', type=int, default=25000, help="output tflite model dir path")
+    parser.add_argument('--sample_max_num', type=int, default=2500, help="output tflite model dir path")
     args = parser.parse_args()
 
     args.input_model_dir_path = os.path.expanduser(args.input_model_dir_path)
