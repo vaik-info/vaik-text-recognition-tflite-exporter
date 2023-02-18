@@ -55,7 +55,7 @@ if __name__ == '__main__':
                         help="output tflite model file path")
     parser.add_argument('--input_height', type=int, default=96)
     parser.add_argument('--input_width', type=int, default=576)
-    parser.add_argument('--sample_max_num', type=int, default=2500, help="output tflite model dir path")
+    parser.add_argument('--sample_max_num', type=int, default=25000, help="output tflite model dir path")
     args = parser.parse_args()
 
     args.input_model_dir_path = os.path.expanduser(args.input_model_dir_path)
